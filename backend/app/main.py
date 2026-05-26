@@ -1,4 +1,3 @@
-import os
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 from typing import List, Optional
@@ -12,15 +11,16 @@ import json
 from groq import Groq
 from threading import Lock
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+from app.config import get_cors_origins, get_env_value
 
 # Load biến môi trường
 load_dotenv()
 security = HTTPBearer()
 
 # Kết nối Supabase
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+SUPABASE_URL = get_env_value("SUPABASE_URL")
+SUPABASE_KEY = get_env_value("SUPABASE_KEY")
+GROQ_API_KEY = get_env_value("GROQ_API_KEY")
 
 groq_client = Groq(api_key=GROQ_API_KEY)
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
@@ -78,7 +78,7 @@ def get_feedback_generation_lock(user_id: str, feedback_date: str) -> Lock:
 # =========================
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=get_cors_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -508,7 +508,7 @@ def get_account_profile_by_auth_id(auth_uid: str) -> dict:
 
 
 def get_app_now() -> datetime:
-    timezone_name = os.getenv("APP_TIMEZONE", "Asia/Ho_Chi_Minh")
+    timezone_name = get_env_value("APP_TIMEZONE", "Asia/Ho_Chi_Minh")
     try:
         return datetime.now(ZoneInfo(timezone_name))
     except ZoneInfoNotFoundError:
@@ -1010,7 +1010,7 @@ Rules:
 - Do not return markdown.
 """
     response = groq_client.chat.completions.create(
-        model=os.getenv("GROQ_MODEL", "openai/gpt-oss-120b"),
+        model=get_env_value("GROQ_MODEL", "openai/gpt-oss-120b"),
         messages=[
             {
                 "role": "system",

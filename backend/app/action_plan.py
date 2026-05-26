@@ -1,4 +1,3 @@
-import os
 import json
 from pathlib import Path
 from typing import List, Optional
@@ -8,6 +7,7 @@ from groq import Groq
 from pydantic import BaseModel, Field
 from supabase import create_client, Client
 from fastapi import HTTPException
+from app.config import get_env_value
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,11 +15,11 @@ ENV_PATH = BASE_DIR / ".env"
 
 load_dotenv(dotenv_path=ENV_PATH)
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+GROQ_API_KEY = get_env_value("GROQ_API_KEY")
+GROQ_MODEL = get_env_value("GROQ_MODEL", "openai/gpt-oss-120b")
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+SUPABASE_URL = get_env_value("SUPABASE_URL")
+SUPABASE_KEY = get_env_value("SUPABASE_KEY")
 
 if not GROQ_API_KEY:
     raise ValueError("Missing GROQ_API_KEY. Please check backend/.env file.")
