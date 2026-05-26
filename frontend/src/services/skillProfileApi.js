@@ -1,6 +1,5 @@
 import supabase from './supabaseClient';
-
-const API_BASE_URL = "http://127.0.0.1:8000";
+import { API_BASE_URL } from './apiConfig';
 
 export const getSkillProfile = async () => {
   const { data } = await supabase.auth.getSession();
@@ -12,7 +11,7 @@ export const getSkillProfile = async () => {
 
   localStorage.setItem("access_token", token);
 
-  const response = await fetch(`${API_BASE_URL}/api/skills/profile`, {
+  const response = await fetch(`${API_BASE_URL}/skills/profile`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`

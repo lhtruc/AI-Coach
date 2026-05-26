@@ -1,4 +1,6 @@
-const REGISTER_ENDPOINT = "http://127.0.0.1:8000/api/auth/register";
+import { API_BASE_URL } from './apiConfig';
+
+const REGISTER_ENDPOINT = `${API_BASE_URL}/auth/register`;
 
 const authApi = {
     register: async (payload) => {
@@ -26,7 +28,7 @@ const authApi = {
 
     updateRole: async (role) => {
         const token = localStorage.getItem('access_token');
-        const response = await fetch('http://127.0.0.1:8000/api/users/role', {
+        const response = await fetch(`${API_BASE_URL}/users/role`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +49,7 @@ const authApi = {
 
     updateProfile: async ({ display_name, role }) => {
         const token = localStorage.getItem('access_token');
-        const response = await fetch('http://127.0.0.1:8000/api/users/profile', {
+        const response = await fetch(`${API_BASE_URL}/users/profile`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +70,7 @@ const authApi = {
 
     getCurrentUser: async () => {
         const token = localStorage.getItem('access_token');
-        const response = await fetch('http://127.0.0.1:8000/api/auth/me', {
+        const response = await fetch(`${API_BASE_URL}/auth/me`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +89,7 @@ const authApi = {
 ,
 
     syncAccount: async (accessToken) => {
-        const response = await fetch('http://127.0.0.1:8000/api/auth/sync-account', {
+        const response = await fetch(`${API_BASE_URL}/auth/sync-account`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

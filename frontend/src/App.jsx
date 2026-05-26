@@ -12,12 +12,12 @@ import Onboarding from "./pages/Onboarding";
 import SkillAssessment from "./pages/SkillAssessment";
 import SkillProfile from "./pages/SkillProfile";
 import ActionPlan from "./pages/ActionPlan";
-import ActionProgress from "./pages/ActionProgress";
 
 import Dashboard from "./pages/Dashboard";
 import ProgressDashboard from "./pages/ProgressDashboard";
 import Feedback from "./pages/Feedback";
 import Settings from "./pages/Settings";
+import ErrorPage from "./pages/ErrorPage";
 
 function HomeRedirect() {
   // Đã chuẩn hóa: Chỉ sử dụng access_token theo thiết kế mới
@@ -36,6 +36,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/unauthorized" element={<ErrorPage type="unauthorized" />} />
+          <Route path="/forbidden" element={<ErrorPage type="forbidden" />} />
 
           {/* Protected Routes */}
           <Route path="/" element={<HomeRedirect />} />
@@ -66,17 +68,6 @@ export default function App() {
               <RequireAuth>
                 <RequireRole>
                   <ActionPlan />
-                </RequireRole>
-              </RequireAuth>
-            }
-          />
-
-          <Route
-            path="/action-progress"
-            element={
-              <RequireAuth>
-                <RequireRole>
-                  <ActionProgress />
                 </RequireRole>
               </RequireAuth>
             }
@@ -125,6 +116,8 @@ export default function App() {
               </RequireAuth>
             }
           />
+
+          <Route path="*" element={<ErrorPage type="notFound" />} />
 
         </Routes>
       </Layout>

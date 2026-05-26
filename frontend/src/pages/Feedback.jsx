@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FeedbackCard from '../components/FeedbackCard';
+import { API_BASE_URL } from '../services/apiConfig';
 import './Feedback.css';
 
 export default function Feedback() {
@@ -77,7 +78,7 @@ export default function Feedback() {
     setLoading(true);
 
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/feedback/generate', {
+      const resp = await fetch(`${API_BASE_URL}/feedback/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +104,7 @@ export default function Feedback() {
     setHistoryLoading(true);
 
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/feedback/history', {
+      const resp = await fetch(`${API_BASE_URL}/feedback/history`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -137,7 +138,7 @@ export default function Feedback() {
       setLoading(true);
 
       try {
-        const resp = await fetch('http://127.0.0.1:8000/api/feedback/current', {
+        const resp = await fetch(`${API_BASE_URL}/feedback/current`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

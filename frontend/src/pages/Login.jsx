@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import LoginForm from '../components/LoginForm';
 import supabaseAuth from '../services/supabaseAuth';
 import authApi from '../services/authApi';
+import { API_BASE_URL } from '../services/apiConfig';
 import './Login.css';
 
 export default function Login() {
@@ -51,7 +52,7 @@ export default function Login() {
     }
 
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/auth/me', {
+      const resp = await fetch(`${API_BASE_URL}/auth/me`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +74,7 @@ export default function Login() {
         if (!me.user.role && token) {
           try {
             await authApi.syncAccount(token);
-            const retryResp = await fetch('http://127.0.0.1:8000/api/auth/me', {
+            const retryResp = await fetch(`${API_BASE_URL}/auth/me`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',

@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import supabase from '../services/supabaseClient';
+import { API_BASE_URL } from '../services/apiConfig';
 import './Dashboard.css';
 import Feedback from './Feedback';
-
-const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
 async function getAuthHeaders() {
   const { data } = await supabase.auth.getSession();
