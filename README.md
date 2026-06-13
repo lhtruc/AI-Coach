@@ -2,6 +2,10 @@
 
 AI Coach is a Scrum-focused coaching application that helps users assess skills, generate learning goals, build action plans, track progress, and manage profile settings.
 
+## Workflow Overview
+
+![Overall Workflow](docs/overall-workflow.jpg)
+
 ## Tech Stack
 
 - Frontend: React, Vite, Supabase client
@@ -66,8 +70,28 @@ Create local `.env` files from the provided examples:
 - Progress dashboard and task status updates
 - Feedback and settings pages
 
+## Screenshots
+
+### Homepage
+![Homepage](docs/homepage.jpg)
+
+### Progress Dashboard
+![Dashboard](docs/dashboard.jpg)
+
 ## Notes
 
 - Backend API calls are currently configured for local development at `http://127.0.0.1:8000`.
 - Supabase credentials are required for authentication and data access.
 - Groq credentials are required for AI goal and action plan generation.
+
+## SCRUM Team
+
+| Name | Email | Gender | Team | Role |
+| --- | --- | --- | --- | --- |
+| Nguyễn Nhật Phát | nhatphatnguyen.ai@gmail.com | Male | Seven Eleven | PO |
+| Trần Quốc Huy | huytranquoc24@gmail.com | Male | Seven Eleven | SM |
+| Bùi Trần Tấn Phát | 23110052@student.hcmute.edu.vn | Male | Seven Eleven | DEV |
+| Lê Hữu Trực | lehuutruc28122005@gmail.com | Male | Seven Eleven | DEV |
+| Nguyễn Đức Thắng | 23110062@student.hcmute.edu.vn | Male | Seven Eleven | DEV |
+| Nguyễn Phi Long | philong300905@gmail.com | Male | Seven Eleven | DEV |
+| Nguyễn Thành Triệu | 23110066@student.hcmute.edu.vn | Male | Seven Eleven | DEV |
